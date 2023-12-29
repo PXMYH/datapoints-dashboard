@@ -34,44 +34,23 @@
       const formattedDate = currentDate.toLocaleDateString('en-US', options);
       currentDateElement.textContent = `Current Date: ${formattedDate}`;
 
-      // JavaScript code to fetch the current Bank of Canada interest rate
-      const currentInterestRateElement = document.getElementById(
-        'currentInterestRate'
-      );
-
-      // Puppeteer script to fetch interest rate from the Bank of Canada website
-      async function fetchInterestRate() {
-        const browser = await puppeteer.launch();
-        const page = await browser.newPage();
-
-        // Navigate to the Bank of Canada website
-        await page.goto(
-          'https://www.bankofcanada.ca/core-functions/monetary-policy/key-interest-rate/'
-        );
-
-        // Wait for the interest rate element to be present on the page
-        await page.waitForSelector(
-          '#target-table > tbody > tr:nth-child(1) > td:nth-child(2)'
-        );
-
-        // Extract the interest rate value
-        const interestRate = await page.$eval(
-          '#target-table > tbody > tr:nth-child(1) > td:nth-child(2)',
-          (element) => element.textContent.trim()
-        );
-
-        // Update the HTML content with the interest rate
-        currentInterestRateElement.textContent = `Current Interest Rate: ${interestRate}`;
-
-        // Close the browser
-        await browser.close();
-      }
-
-      // Call the Puppeteer script to fetch and display the interest rate
-      fetchInterestRate();
+      // JavaScript code to fetch and display the Bank of Canada interest rate
+      fetch('BoC_Interest_Rate.txt')
+        .then((response) => response.text())
+        .then((interestRate) => {
+          const interestRateElement = document.getElementById(
+            'currentInterestRate'
+          );
+          interestRateElement.textContent = `Bank of Canada Interest Rate: ${interestRate}%`;
+        })
+        .catch((error) => {
+          console.error('Error fetching Bank of Canada interest rate:', error);
+          const interestRateElement = document.getElementById(
+            'currentInterestRate'
+          );
+          interestRateElement.textContent =
+            'Unable to fetch Bank of Canada interest rate';
+        });
     </script>
-
-    <!-- Include Puppeteer from a CDN for demonstration purposes -->
-    <script src="https://cdn.jsdelivr.net/npm/puppeteer@13.0.1/dist/puppeteer.min.js"></script>
   </body>
 </html>
