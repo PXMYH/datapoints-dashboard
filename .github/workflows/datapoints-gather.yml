@@ -1,0 +1,27 @@
+name: Run yarn start
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 15 * * *' # Runs every day at 10:00 AM CT (adjust the cron expression as needed)
+
+jobs:
+  run-yarn-start:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js with Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14' # Use the desired Node.js version
+          registry-url: 'https://registry.yarnpkg.com/'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run yarn start
+        run: yarn start
