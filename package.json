@@ -1,0 +1,12 @@
+{
+  "name": "datapoints-dashboard",
+  "version": "0.0.1",
+  "description": "Puppeteer Screenshot data points",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^10.0.0"
+  }
+}
