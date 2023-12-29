@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TMX BoA Rate Probability</title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 50px; /* Adjust margin as needed */
+      }
+      img {
+        display: block;
+        margin: 20px auto; /* Adjust margin as needed */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>TMX BoA Rate Probability</h1>
+    <p id="currentDate"></p>
+    <img src="TMX_BoA_Rate_Probability.png" alt="TMX BoA Rate Probability" />
+
+    <script>
+      // JavaScript code to display the current date
+      const currentDateElement = document.getElementById('currentDate');
+      const currentDate = new Date();
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
+      const formattedDate = currentDate.toLocaleDateString('en-US', options);
+      currentDateElement.textContent = `Current Date: ${formattedDate}`;
+    </script>
+  </body>
+</html>
